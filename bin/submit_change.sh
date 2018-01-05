@@ -20,16 +20,16 @@ if [ -z "$1" ]; then
 fi
 
 ## clean && generate
-hexo_clean_generate=`hexo clean && hexo generate &> /dev/null`
+#hexo_clean_generate=`hexo clean && hexo generate &> /dev/null`
 
-if [ $? -ne 0 ]; then
-    echo ${warning[2]}
-    exit 1
-fi
+#if [ $? -ne 0 ]; then
+#    echo ${warning[2]}
+#    exit 1
+#fi
 
 # add file
 gadd=`git add .`
-gcommit=`git commit -m $1`
+gcommit=`git commit -m "$1"`
 if [ -z $gadd -a "$gcommit" ]; then git push origin hexo && hexo deploy
     echo "SUBMIT SUBCESS!!!"
 fi
