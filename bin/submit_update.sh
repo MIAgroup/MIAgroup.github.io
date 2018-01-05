@@ -2,8 +2,8 @@ git_username=`git config user.name`
 git_email=`git config user.email`
 warning=(
     'Please run `git config --global user.name` and `git config --global user.email` to set up your github username and email, and RERUN script'  \
-    'Please add commit message when running script,\neg. `sh submit.sh "add article written by Lincoln"`'
-    'Generate web files faile, make sure everything works by local_test script'
+    'Please add commit message when running script,\neg. `sh submit.sh "add article written by Lincoln"`' \
+    'Generate web files faile, make sure everything works by local_test script' \
 )
 
 # test git config setting for submit
@@ -30,9 +30,7 @@ fi
 # add file
 gadd=`git add .`
 gcommit=`git commit -m $1`
-
-if [ -z $gadd -a "$gcommit" ]; then
-    git push origin hexo && hexo deploy
+if [ -z $gadd -a "$gcommit" ]; then git push origin hexo && hexo deploy
     echo "SUBMIT SUBCESS!!!"
 fi
 
