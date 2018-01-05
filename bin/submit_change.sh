@@ -30,7 +30,8 @@ fi
 # add file
 gadd=`git add .`
 gcommit=`git commit -m "$1"`
-if [ -z $gadd -a "$gcommit" ]; then git push origin hexo && hexo deploy
+if [ -z $gadd -a "$gcommit" ]; then
+    git push origin hexo
     echo "SUBMIT SUBCESS!!!"
 fi
 
