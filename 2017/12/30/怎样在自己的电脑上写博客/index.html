@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/brain_medium.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/brain_small.png?v=5.1.3">
+
+
+
+
+
+
+  <meta name="keywords" content="this_site,cuizhiying," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="整体的写作过程进入网站目录1$ cd MIAgroup.github.io 更新整个项目，因为别人可能已经往这个网站上提交了新的内容，所以一定要记得先将最新的内容下载回来．我已经写好脚本，直接运行即可1$ ./pull.sh 注意，这个命令是比较简单粗暴的将ｇｉｔｈｕｂ上的内容强制与本地的分支进行合并，覆盖本地的仓库内容的．只要每次写东西之前，都做完这完整的一套流程，就不会有啥问题了．因为ｇｉｔｈ">
+<meta name="keywords" content="this_site,cuizhiying">
+<meta property="og:type" content="article">
+<meta property="og:title" content="怎样在自己的电脑上写博客">
+<meta property="og:url" content="http://MIAgroup.github.io/2017/12/30/怎样在自己的电脑上写博客/index.html">
+<meta property="og:site_name" content="MIAgroup">
+<meta property="og:description" content="整体的写作过程进入网站目录1$ cd MIAgroup.github.io 更新整个项目，因为别人可能已经往这个网站上提交了新的内容，所以一定要记得先将最新的内容下载回来．我已经写好脚本，直接运行即可1$ ./pull.sh 注意，这个命令是比较简单粗暴的将ｇｉｔｈｕｂ上的内容强制与本地的分支进行合并，覆盖本地的仓库内容的．只要每次写东西之前，都做完这完整的一套流程，就不会有啥问题了．因为ｇｉｔｈ">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-05T02:16:53.446Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="怎样在自己的电脑上写博客">
+<meta name="twitter:description" content="整体的写作过程进入网站目录1$ cd MIAgroup.github.io 更新整个项目，因为别人可能已经往这个网站上提交了新的内容，所以一定要记得先将最新的内容下载回来．我已经写好脚本，直接运行即可1$ ./pull.sh 注意，这个命令是比较简单粗暴的将ｇｉｔｈｕｂ上的内容强制与本地的分支进行合并，覆盖本地的仓库内容的．只要每次写东西之前，都做完这完整的一套流程，就不会有啥问题了．因为ｇｉｔｈ">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://MIAgroup.github.io/2017/12/30/怎样在自己的电脑上写博客/"/>
+
+
+
+
+
+  <title>怎样在自己的电脑上写博客 | MIAgroup</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MIAgroup</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">路漫漫而其修远兮，吾将上下而求索</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://MIAgroup.github.io/2017/12/30/怎样在自己的电脑上写博客/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MIAgroup">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/brain_large.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIAgroup">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">怎样在自己的电脑上写博客</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-30T20:17:13+08:00">
+                2017-12-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          <span>&nbsp; | &nbsp;
+          <span id="busuanzi_value_page_pv" ></span>次阅读
+          </span>    
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="整体的写作过程"><a href="#整体的写作过程" class="headerlink" title="整体的写作过程"></a>整体的写作过程</h2><p>进入网站目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> MIAgroup.github.io</span><br></pre></td></tr></table></figure></p>
+<p>更新整个项目，因为别人可能已经往这个网站上提交了新的内容，所以一定要记得先将最新的内容下载回来．我已经写好脚本，直接运行即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./pull.sh</span><br></pre></td></tr></table></figure></p>
+<p>注意，这个命令是比较简单粗暴的将ｇｉｔｈｕｂ上的内容强制与本地的分支进行合并，覆盖本地的仓库内容的．只要每次写东西之前，都做完这完整的一套流程，就不会有啥问题了．因为ｇｉｔｈｕｂ的合并冲突比较复杂，我也没有搞得很清楚，就只能先这样子简单粗暴得来了．<br>然后，创建您的博客，输入以下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"your blog title "</span></span><br></pre></td></tr></table></figure></p>
+<p>创建的文件在这个目录下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./<span class="built_in">source</span>/_post/your_blog_title.md</span><br></pre></td></tr></table></figure></p>
+<p>你可以用你喜欢的编辑器打开如vim或者gedit<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ./<span class="built_in">source</span>/_post/your_blog_title.md</span><br></pre></td></tr></table></figure></p>
+<p>写好博客后，记得要提交到Github上，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./submit.sh</span><br></pre></td></tr></table></figure></p>
+<p>过大约１０分钟，就可以在<code>http://miagroup.github.io</code>上看到了</p>
+<h2 id="在hexo上写Markdown的几个要点"><a href="#在hexo上写Markdown的几个要点" class="headerlink" title="在hexo上写Markdown的几个要点"></a>在hexo上写Markdown的几个要点</h2><p>新建一个博客<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"my bolg title"</span></span><br></pre></td></tr></table></figure></p>
+<p>然后打开该文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vim <span class="built_in">source</span>/_post/my_blog_title.md</span><br></pre></td></tr></table></figure></p>
+<p>注意到，我们新建的博客名已经编程markdown文件的文件名，其中的空格使用下划线来代替了，并且加上了makedown的后缀名<code>.md</code><br>我们打开了一个新建的markdown文件之后，我们看到的内容应该如下所示：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: my blog title</span><br><span class="line">date: 2017-12-30 20:17:13</span><br><span class="line">tags: </span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
+<p>注意到，title就是我们新建的博客时的名字．然后标签内容是空的．我们写之前最好要先对其进行分类，也就是打上标签．比如我写的这篇博客是我写的，我就打上了<code>cuizhiying</code>这样子的标签，这个博客的内容是有关这个网站的使用的，我就再加一个<code>this_site</code>的标签．标签的内容都是自己瞎写就行了，格式正确系统会自动识别的了</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: my blog title</span><br><span class="line">date: 2017-12-30 20:17:13</span><br><span class="line">tags: [cuizhiying, this_site]</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>然后我们就可以在下面使用markdown的标签格式来写内容了．如下所示：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: my blog title</span><br><span class="line">date: 2017-12-30 20:17:13</span><br><span class="line">tags: [cuizhiying, this_site]</span><br><span class="line">---</span><br><span class="line"><span class="section">## how to write a blog</span></span><br><span class="line"></span><br><span class="line">just write with your heart!</span><br></pre></td></tr></table></figure>
+<p>markdown的入门教程百度上很多，也可以简单参考一下这个，点击<a href="https://www.jianshu.com/p/q81RER" target="_blank" rel="noopener">这里</a></p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>不管您的博客是否写完了，就建议你在编辑了之后，马上就运行</p>
+<pre><code class="bash">$ ./submit.sh
+</code></pre>
+<p>提交你的修改，(当然，你提交了之后别人就可以看到你还没有写完的博客草稿了，可是这又有什么关系呢)．别人也最好不要私自修改别人的博客内容，一是为了尊重，二是避免合并的冲突．</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/this-site/" rel="tag"># this_site</a>
+          
+            <a href="/tags/cuizhiying/" rel="tag"># cuizhiying</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/29/站点建设日志/" rel="next" title="站点建设日志">
+                <i class="fa fa-chevron-left"></i> 站点建设日志
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/30/怎样在自己的电脑上配置环境/" rel="prev" title="怎样在自己的电脑上配置环境">
+                怎样在自己的电脑上配置环境 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/brain_large.png"
+                alt="MIAgroup" />
+            
+              <p class="site-author-name" itemprop="name">MIAgroup</p>
+              <p class="site-description motion-element" itemprop="description">Medical Image Analysis Group from SYSU</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MIAgroup" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:MIAgroup.sysu@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#整体的写作过程"><span class="nav-number">1.</span> <span class="nav-text">整体的写作过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在hexo上写Markdown的几个要点"><span class="nav-number">2.</span> <span class="nav-text">在hexo上写Markdown的几个要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">3.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MIAgroup</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_uv">
+  你是第<span id="busuanzi_value_site_uv"></span>个蹦跶到本站的小伙伴
+  </span>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/brain_medium.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/brain_small.png?v=5.1.3">
+
+
+
+
+
+
+  <meta name="keywords" content="this_site,cuizhiying," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文主要是给实验室的小伙伴们介绍一下，如何给自己电脑（主要针对Ubuntu系统，mac上差别不大）配置hexo的环境，让自己能够在自己电脑上写博客，并且推送到网上去．该文章持续更新中，遇到问题欢迎讨论． 电脑基本环境配置基本的电脑配置环境要有git和Nodejs，一般Ubuntu系统都预装了,没有的话安装命令如下：12$ sudo apt-get install git$ sudo apt-get">
+<meta name="keywords" content="this_site,cuizhiying">
+<meta property="og:type" content="article">
+<meta property="og:title" content="怎样在自己的电脑上配置环境">
+<meta property="og:url" content="http://MIAgroup.github.io/2017/12/30/怎样在自己的电脑上配置环境/index.html">
+<meta property="og:site_name" content="MIAgroup">
+<meta property="og:description" content="本文主要是给实验室的小伙伴们介绍一下，如何给自己电脑（主要针对Ubuntu系统，mac上差别不大）配置hexo的环境，让自己能够在自己电脑上写博客，并且推送到网上去．该文章持续更新中，遇到问题欢迎讨论． 电脑基本环境配置基本的电脑配置环境要有git和Nodejs，一般Ubuntu系统都预装了,没有的话安装命令如下：12$ sudo apt-get install git$ sudo apt-get">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-05T02:16:53.446Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="怎样在自己的电脑上配置环境">
+<meta name="twitter:description" content="本文主要是给实验室的小伙伴们介绍一下，如何给自己电脑（主要针对Ubuntu系统，mac上差别不大）配置hexo的环境，让自己能够在自己电脑上写博客，并且推送到网上去．该文章持续更新中，遇到问题欢迎讨论． 电脑基本环境配置基本的电脑配置环境要有git和Nodejs，一般Ubuntu系统都预装了,没有的话安装命令如下：12$ sudo apt-get install git$ sudo apt-get">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://MIAgroup.github.io/2017/12/30/怎样在自己的电脑上配置环境/"/>
+
+
+
+
+
+  <title>怎样在自己的电脑上配置环境 | MIAgroup</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MIAgroup</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">路漫漫而其修远兮，吾将上下而求索</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://MIAgroup.github.io/2017/12/30/怎样在自己的电脑上配置环境/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MIAgroup">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/brain_large.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIAgroup">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">怎样在自己的电脑上配置环境</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-30T20:19:01+08:00">
+                2017-12-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          <span>&nbsp; | &nbsp;
+          <span id="busuanzi_value_page_pv" ></span>次阅读
+          </span>    
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文主要是给实验室的小伙伴们介绍一下，如何给自己电脑（主要针对Ubuntu系统，mac上差别不大）配置<code>hexo</code>的环境，让自己能够在自己电脑上写博客，并且推送到网上去．该文章持续更新中，遇到问题欢迎讨论．</p>
+<h2 id="电脑基本环境配置"><a href="#电脑基本环境配置" class="headerlink" title="电脑基本环境配置"></a>电脑基本环境配置</h2><p>基本的电脑配置环境要有<code>git</code>和<code>Nodejs</code>，一般Ubuntu系统都预装了,没有的话安装命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install git</span><br><span class="line">$ sudo apt-get install nodejs</span><br></pre></td></tr></table></figure></p>
+<p>顺便提一下，<code>git</code>这个工具呢是<code>Linux</code>下非常好用的分布式版本控制器，推荐教程是廖雪峰的<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">git教程</a>　　<br>安装好之后，我们就可以使用一直陪伴着<code>nodejs</code>的安装工具<code>npm</code>来安装<code>hexo</code>这个模板框架了．命令如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure></p>
+<p><code>hexo</code>安装有问题的可以参考一下官网，点击<a href="https://hexo.io/zh-cn/index.html" target="_blank" rel="noopener">这里</a>，不知为啥，这个安装过程有点慢．</p>
+<h2 id="配置Github环境"><a href="#配置Github环境" class="headerlink" title="配置Github环境"></a>配置Github环境</h2><h3 id="给Github账号添加公钥"><a href="#给Github账号添加公钥" class="headerlink" title="给Github账号添加公钥"></a>给Github账号添加公钥</h3><p>添加的秘钥的过程，实际上就是Github对我们的身份进行一个自动认证的过程，这里有一个图文并茂的教程，我就不重复了，点击<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001374385852170d9c7adf13c30429b9660d0eb689dd43a000" target="_blank" rel="noopener">这里</a>，我们的Github账号是：<code>MIAgroup.sysu@gmail.com</code>,账号名称是<code>MIAgroup</code>，密码到群里去问吧．<br>注意，我在添加秘钥的过程中遇到了一个问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Key is already in use</span><br></pre></td></tr></table></figure></p>
+<p>原因是我笔记本电脑上的公钥已经添加到了我自己的github账号里面去了，所以解决办法就是没有办法．一个公钥只能用在一个账号上，不能同时给两个github账号使用，如果重新生成秘钥的话，原来的github就没办法自动认证了．（好吧，坐等大神打我的脸）<br>另外，添加秘钥的时候，要打上自己的名字，方便其他人辨别是谁的秘钥，同时不要误删别人的秘钥，这样子别人就不能用．</p>
+<h3 id="初次使用git的玩家的设置"><a href="#初次使用git的玩家的设置" class="headerlink" title="初次使用git的玩家的设置"></a>初次使用git的玩家的设置</h3><p>需要给自己做一个基本的设置如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">"pickup_a_nanme"</span></span><br><span class="line">$ git config --global user.email example@example.com</span><br></pre></td></tr></table></figure></p>
+<p>上面的名字和邮箱改成自己的，其实瞎写也可以好像，邮箱有邮箱的格式就行了，不需要进行验证．<br>更多精彩git的初始设置,有兴趣的可以看<a href="https://git-scm.com/book/zh/v1/%E8%B5%B7%E6%AD%A5-%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C-Git-%E5%89%8D%E7%9A%84%E9%85%8D%E7%BD%AE" target="_blank" rel="noopener">这里</a></p>
+<h3 id="使用git将网站克隆仓库到本地"><a href="#使用git将网站克隆仓库到本地" class="headerlink" title="使用git将网站克隆仓库到本地"></a>使用git将网站克隆仓库到本地</h3><p>选择好你要安放的目录,输入命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> git@github.com:MIAgroup/MIAgroup.github.io.git</span><br></pre></td></tr></table></figure></p>
+<p>该文件下就会出现一个<code>MIAgroup.github.io</code>的目录，里面包括了<code>hexo</code>和<code>git</code>的配置，反正整个网站的所有内容都在里面了．<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> MIAgroup.github.io</span><br></pre></td></tr></table></figure></p>
+<p>进入文件目录，添加一个依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
+<p>到这里电脑的配置过程，就基本结束了，以后写博客的时候，都是在这里面写的了．写博客的方法和注意事项将会在一篇文章中写出．是不是也并不算复杂．做好这些以后就可以完全忘记这些东西了，之后写博客就只需要记得写博客的命令和方法就行了．</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这是一个很简陋的方法，对于我们多人写博客来说，每个人都有了修改整个网站的所有权限．但是，平常只要正常使用就没有问题了，误删了别人的文件要及时告之．这是一个版本管理器下的文件，所有删了的东西都可以很容恢复的．enjoy!</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/this-site/" rel="tag"># this_site</a>
+          
+            <a href="/tags/cuizhiying/" rel="tag"># cuizhiying</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/30/怎样在自己的电脑上写博客/" rel="next" title="怎样在自己的电脑上写博客">
+                <i class="fa fa-chevron-left"></i> 怎样在自己的电脑上写博客
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/04/服务器环境配置/" rel="prev" title="服务器环境配置">
+                服务器环境配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/brain_large.png"
+                alt="MIAgroup" />
+            
+              <p class="site-author-name" itemprop="name">MIAgroup</p>
+              <p class="site-description motion-element" itemprop="description">Medical Image Analysis Group from SYSU</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MIAgroup" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:MIAgroup.sysu@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#电脑基本环境配置"><span class="nav-number">1.</span> <span class="nav-text">电脑基本环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置Github环境"><span class="nav-number">2.</span> <span class="nav-text">配置Github环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#给Github账号添加公钥"><span class="nav-number">2.1.</span> <span class="nav-text">给Github账号添加公钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初次使用git的玩家的设置"><span class="nav-number">2.2.</span> <span class="nav-text">初次使用git的玩家的设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用git将网站克隆仓库到本地"><span class="nav-number">2.3.</span> <span class="nav-text">使用git将网站克隆仓库到本地</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MIAgroup</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_uv">
+  你是第<span id="busuanzi_value_site_uv"></span>个蹦跶到本站的小伙伴
+  </span>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
