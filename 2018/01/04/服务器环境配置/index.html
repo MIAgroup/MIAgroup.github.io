@@ -83,7 +83,7 @@
 <meta property="og:site_name" content="MIAgroup">
 <meta property="og:description" content="实验室服务器背景实验室服务器连接的方式是one-to-many，即一台中转服务器跟着一个GPU服务器集群， 在服务器上跑程序要经过两步  借助ssh从本地电脑登陆中转服务器 借助ssh从中转服务器登陆配置GPU的特定服务器  具体的账号密码咨询实验室服务器管理人员。注意到中转服务器有两个功能  提供中转的渠道，登陆之后可以选择特定的GPU服务器 mount在中转服务器上的文件也会映射到GPU服务器">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-05T02:16:53.446Z">
+<meta property="og:updated_time" content="2018-01-05T02:47:17.117Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="服务器环境配置">
 <meta name="twitter:description" content="实验室服务器背景实验室服务器连接的方式是one-to-many，即一台中转服务器跟着一个GPU服务器集群， 在服务器上跑程序要经过两步  借助ssh从本地电脑登陆中转服务器 借助ssh从中转服务器登陆配置GPU的特定服务器  具体的账号密码咨询实验室服务器管理人员。注意到中转服务器有两个功能  提供中转的渠道，登陆之后可以选择特定的GPU服务器 mount在中转服务器上的文件也会映射到GPU服务器">
@@ -346,41 +346,42 @@
 <h4 id="Python-Tensorflow"><a href="#Python-Tensorflow" class="headerlink" title="Python + Tensorflow"></a>Python + Tensorflow</h4><p>推荐使用<strong>Anaconda</strong>来创建需要的环境。一个不需要管理员权限的<strong>Python Data Science Platform</strong>，实际上是将anaconda的python写入系统环境变量并且优先与系统自带的python实现目的的。我们可以用它来创建一个虚拟环境，指定需要的<strong>Python版本</strong>以及安装特定的包。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 建议先在本地下载，然后通过scp传输到服务器上，服务器连接外网的网速贼慢！！</span><br><span class="line">axel https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh</span><br><span class="line"># 安装anaconda并且更新，python3=3.6</span><br><span class="line">bash Anaconda3-5.0.1-Linux-x86_64.sh</span><br><span class="line">conda update anaconda</span><br></pre></td></tr></table></figure>
 <p>然后安装在创建的虚拟环境下Tensorflow，类似virtualenv，此处文件夹命名为tf35，指的是我们此处采用的是python3.5（不安装最新版本是因为实验室的cudnn只支持8.0，只有python35对应的tensorflow能兼容）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create -m tf35 python</span><br><span class="line">source activate tf35</span><br><span class="line">pip install tensorflow-gpu</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create -m tf35 python=3.5</span><br><span class="line">source activate tf35</span><br><span class="line">pip install tensorflow-gpu</span><br></pre></td></tr></table></figure>
 <h2 id="一些已有的数据集存放"><a href="#一些已有的数据集存放" class="headerlink" title="一些已有的数据集存放"></a>一些已有的数据集存放</h2><p>存放路径<strong>暂定</strong>为, 后期会再调整<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/share/jiaxin</span><br></pre></td></tr></table></figure></p>
 <p>数据集有 </p>
 <table>
 <thead>
 <tr>
-<th>数据集</th>
-<th>详细</th>
-<th>大小量级</th>
+<th style="text-align:center">数据集</th>
+<th style="text-align:center">详细</th>
+<th style="text-align:center">大小量级</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>chest-xray</td>
-<td>胸透</td>
-<td>10G+</td>
+<td style="text-align:center">chest-xray</td>
+<td style="text-align:center">胸透</td>
+<td style="text-align:center">10G+</td>
 </tr>
 <tr>
-<td>cifar</td>
-<td>cifar10, cifar100</td>
-<td>150MB+</td>
+<td style="text-align:center">cifar</td>
+<td style="text-align:center">cifar10, cifar100</td>
+<td style="text-align:center">150MB+</td>
 </tr>
 <tr>
-<td>ICIAR2018_BACH_Challenge.zip</td>
-<td>10G+</td>
+<td style="text-align:center">ICIAR2018_BACH_Challenge.zip</td>
+<td style="text-align:center">breast-xtay</td>
+<td style="text-align:center">10G+</td>
 </tr>
 <tr>
-<td>synapse</td>
-<td>脑？</td>
-<td>20G+</td>
+<td style="text-align:center">synapse</td>
+<td style="text-align:center">brain?</td>
+<td style="text-align:center">20G+</td>
 </tr>
 <tr>
-<td>ILSVRC(ImageNet</td>
-<td>ILSVRC2012*, ILSVRC2015_CLS-LOC.tar.gz, ILSVRC2017_CLS-LOC.tar.gz</td>
-<td>100G+</td>
+<td style="text-align:center">ILSVRC(ImageNet Images)</td>
+<td style="text-align:center">ILSVRC2012*<br>ILSVRC2015_CLS-LOC.tar.gz<br>ILSVRC2017_CLS-LOC.tar.gz</td>
+<td style="text-align:center">100G+</td>
 </tr>
 </tbody>
 </table>
