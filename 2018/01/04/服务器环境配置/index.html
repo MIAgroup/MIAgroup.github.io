@@ -83,7 +83,7 @@
 <meta property="og:site_name" content="MIAgroup">
 <meta property="og:description" content="实验室服务器背景实验室服务器连接的方式是one-to-many，即一台中转服务器跟着一个GPU服务器集群， 在服务器上跑程序要经过两步  借助ssh从本地电脑登陆中转服务器 借助ssh从中转服务器登陆配置GPU的特定服务器  具体的账号密码咨询实验室服务器管理人员。注意到中转服务器有两个功能  提供中转的渠道，登陆之后可以选择特定的GPU服务器 mount在中转服务器上的文件也会映射到GPU服务器">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-15T07:03:31.563Z">
+<meta property="og:updated_time" content="2018-01-15T07:58:46.360Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="服务器环境配置">
 <meta name="twitter:description" content="实验室服务器背景实验室服务器连接的方式是one-to-many，即一台中转服务器跟着一个GPU服务器集群， 在服务器上跑程序要经过两步  借助ssh从本地电脑登陆中转服务器 借助ssh从中转服务器登陆配置GPU的特定服务器  具体的账号密码咨询实验室服务器管理人员。注意到中转服务器有两个功能  提供中转的渠道，登陆之后可以选择特定的GPU服务器 mount在中转服务器上的文件也会映射到GPU服务器">
@@ -401,6 +401,20 @@
 </tbody>
 </table>
 <p>ps. 如果下载国外数据集网速又比较<strong>捉急</strong>，欢迎找<strong>LincolnZjx</strong>（嗯，有特效）</p>
+<h3 id="可视化界面连接服务器获取文件的办法"><a href="#可视化界面连接服务器获取文件的办法" class="headerlink" title="可视化界面连接服务器获取文件的办法"></a>可视化界面连接服务器获取文件的办法</h3><p>实际上服务器是提供了<strong>ftp</strong>服务。因而在<strong>ubuntu</strong>系统下，我们可以</p>
+<ol>
+<li>打开<strong>files</strong></li>
+<li>点击左侧栏最下面的<strong>+ Other Locations</strong></li>
+<li>在界面最下边输入<strong>ftp://服务器ip地址</strong>， 然后点击<strong>connect</strong></li>
+</ol>
+<p>然后在<strong>files</strong>拖取文件到本地或者上传。当然文件多的时候还是建议用命令行界面的ftp或者scp</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ftp -p ip_address</span><br></pre></td></tr></table></figure>
+<p>查看目录文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls</span><br></pre></td></tr></table></figure>
+<p>下载的命令是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get /path/to/files</span><br></pre></td></tr></table></figure>
+<p>上传的命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">put /path/to/file</span><br></pre></td></tr></table></figure>
 <h2 id="科学上网Tips"><a href="#科学上网Tips" class="headerlink" title="科学上网Tips"></a>科学上网Tips</h2><p>两种做法<br>第一种：下载Lantern，安装即可使用。<br>第二种：借助ss和一台国外的服务器。简单来说就是，本地数据经过ss的加密发送给国外的服务器，服务器上有ss服务端接受并解密查询，再转发查询结果回来。</p>
 <p>以下简略介绍第二种做法</p>
 <h4 id="具体流程"><a href="#具体流程" class="headerlink" title="具体流程"></a>具体流程</h4><ol>
@@ -613,7 +627,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验室服务器背景"><span class="nav-number">1.</span> <span class="nav-text">实验室服务器背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验室服务器配置"><span class="nav-number">2.</span> <span class="nav-text">实验室服务器配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Python-Tensorflow"><span class="nav-number">2.0.1.</span> <span class="nav-text">Python + Tensorflow</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验室服务器代码运行"><span class="nav-number">3.</span> <span class="nav-text">实验室服务器代码运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些已有的数据集存放"><span class="nav-number">4.</span> <span class="nav-text">一些已有的数据集存放</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#科学上网Tips"><span class="nav-number">5.</span> <span class="nav-text">科学上网Tips</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#具体流程"><span class="nav-number">5.0.1.</span> <span class="nav-text">具体流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端"><span class="nav-number">5.0.2.</span> <span class="nav-text">服务端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端设置"><span class="nav-number">5.0.3.</span> <span class="nav-text">客户端设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新日志"><span class="nav-number">5.1.</span> <span class="nav-text">更新日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">5.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验室服务器背景"><span class="nav-number">1.</span> <span class="nav-text">实验室服务器背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验室服务器配置"><span class="nav-number">2.</span> <span class="nav-text">实验室服务器配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Python-Tensorflow"><span class="nav-number">2.0.1.</span> <span class="nav-text">Python + Tensorflow</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验室服务器代码运行"><span class="nav-number">3.</span> <span class="nav-text">实验室服务器代码运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些已有的数据集存放"><span class="nav-number">4.</span> <span class="nav-text">一些已有的数据集存放</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可视化界面连接服务器获取文件的办法"><span class="nav-number">4.1.</span> <span class="nav-text">可视化界面连接服务器获取文件的办法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#科学上网Tips"><span class="nav-number">5.</span> <span class="nav-text">科学上网Tips</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#具体流程"><span class="nav-number">5.0.1.</span> <span class="nav-text">具体流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端"><span class="nav-number">5.0.2.</span> <span class="nav-text">服务端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端设置"><span class="nav-number">5.0.3.</span> <span class="nav-text">客户端设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新日志"><span class="nav-number">5.1.</span> <span class="nav-text">更新日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">5.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
             
 
           </div>
