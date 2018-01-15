@@ -83,7 +83,7 @@
 <meta property="og:site_name" content="MIAgroup">
 <meta property="og:description" content="实验室服务器背景实验室服务器连接的方式是one-to-many，即一台中转服务器跟着一个GPU服务器集群， 在服务器上跑程序要经过两步  借助ssh从本地电脑登陆中转服务器 借助ssh从中转服务器登陆配置GPU的特定服务器  具体的账号密码咨询实验室服务器管理人员。注意到中转服务器有两个功能  提供中转的渠道，登陆之后可以选择特定的GPU服务器 mount在中转服务器上的文件也会映射到GPU服务器">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-05T02:47:17.117Z">
+<meta property="og:updated_time" content="2018-01-15T04:10:49.508Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="服务器环境配置">
 <meta name="twitter:description" content="实验室服务器背景实验室服务器连接的方式是one-to-many，即一台中转服务器跟着一个GPU服务器集群， 在服务器上跑程序要经过两步  借助ssh从本地电脑登陆中转服务器 借助ssh从中转服务器登陆配置GPU的特定服务器  具体的账号密码咨询实验室服务器管理人员。注意到中转服务器有两个功能  提供中转的渠道，登陆之后可以选择特定的GPU服务器 mount在中转服务器上的文件也会映射到GPU服务器">
@@ -344,10 +344,25 @@
 </ol>
 <h2 id="实验室服务器配置"><a href="#实验室服务器配置" class="headerlink" title="实验室服务器配置"></a>实验室服务器配置</h2><p>因为服务器为了兼容更多的程序，包的升级比较缓慢，普通用户是不能使用管理员的命令的！这时候我们需要配置自己的环境</p>
 <h4 id="Python-Tensorflow"><a href="#Python-Tensorflow" class="headerlink" title="Python + Tensorflow"></a>Python + Tensorflow</h4><p>推荐使用<strong>Anaconda</strong>来创建需要的环境。一个不需要管理员权限的<strong>Python Data Science Platform</strong>，实际上是将anaconda的python写入系统环境变量并且优先与系统自带的python实现目的的。我们可以用它来创建一个虚拟环境，指定需要的<strong>Python版本</strong>以及安装特定的包。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 建议先在本地下载，然后通过scp传输到服务器上，服务器连接外网的网速贼慢！！</span><br><span class="line">axel https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh</span><br><span class="line"># 安装anaconda并且更新，python3=3.6</span><br><span class="line">bash Anaconda3-5.0.1-Linux-x86_64.sh</span><br><span class="line">conda update anaconda</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 建议先在本地下载，然后通过scp传输到服务器上，服务器连接外网的网速贼慢！！</span><br><span class="line">axel https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh</span><br><span class="line"># 安装anaconda并且更新，python3=3.6</span><br><span class="line">bash Anaconda3-5.0.1-Linux-x86_64.sh</span><br><span class="line"># 在~/.bashrc中添加以下这句，使得conda加入系统环境变量，方能被使用</span><br><span class="line">. /home/path_to_your_anaconda/etc/profile.d/conda.sh</span><br><span class="line"># 再升级anaconda</span><br><span class="line">conda update anaconda</span><br></pre></td></tr></table></figure>
 <p>然后安装在创建的虚拟环境下Tensorflow，类似virtualenv，此处文件夹命名为tf35，指的是我们此处采用的是python3.5（不安装最新版本是因为实验室的cudnn只支持8.0，只有python35对应的tensorflow能兼容）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create -m tf35 python=3.5</span><br><span class="line">source activate tf35</span><br><span class="line">pip install tensorflow-gpu</span><br></pre></td></tr></table></figure>
-<h2 id="一些已有的数据集存放"><a href="#一些已有的数据集存放" class="headerlink" title="一些已有的数据集存放"></a>一些已有的数据集存放</h2><p>存放路径<strong>暂定</strong>为, 后期会再调整<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/share/jiaxin</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create -n tf35 python=3.5</span><br><span class="line">source activate tf35</span><br><span class="line">pip install tensorflow-gpu</span><br></pre></td></tr></table></figure>
+<h2 id="实验室服务器代码运行"><a href="#实验室服务器代码运行" class="headerlink" title="实验室服务器代码运行"></a>实验室服务器代码运行</h2><p>假设我们成功完成以上设置且沿用了上面的命名。运行代码完整流程如下</p>
+<ol>
+<li>ssh登陆到中转服务器</li>
+<li>再ssh登陆到GPU服务器（192.168.1.x, x在4-26之间）</li>
+<li>使用以下代码查看GPU是否空闲，不行的话退出到中转服务器上（<strong>exit</strong>），再选择另一台GPU服务器</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi</span><br></pre></td></tr></table></figure>
+<ol>
+<li>运行以下代码，开启<strong>python3.5</strong>虚拟环境，这样才能运行有关tensotflow的代码</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate tf35</span><br></pre></td></tr></table></figure>
+<ol>
+<li>代码或者数据集可以通过<strong>git</strong>或者<strong>scp</strong>或者<strong>ftp</strong>（感谢实验室同学提醒）上传到服务器，然后在代码目录运行</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python path/to/code</span><br></pre></td></tr></table></figure>
+<h2 id="一些已有的数据集存放"><a href="#一些已有的数据集存放" class="headerlink" title="一些已有的数据集存放"></a>一些已有的数据集存放</h2><p>存放路径<strong>暂定</strong>为, 后期可能会再调整。建议实验室的同学把新下载的数据集也放在该目录下，好人一生平安🙈。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/share2/MIAGroup</span><br></pre></td></tr></table></figure></p>
 <p>数据集有 </p>
 <table>
 <thead>
@@ -385,6 +400,7 @@
 </tr>
 </tbody>
 </table>
+<p>ps. 如果下载国外数据集网速又比较<strong>捉急</strong>，欢迎找<strong>LincolnZjx</strong>（嗯，有特效）</p>
 <h2 id="科学上网Tips"><a href="#科学上网Tips" class="headerlink" title="科学上网Tips"></a>科学上网Tips</h2><p>两种做法<br>第一种：下载Lantern，安装即可使用。<br>第二种：借助ss和一台国外的服务器。简单来说就是，本地数据经过ss的加密发送给国外的服务器，服务器上有ss服务端接受并解密查询，再转发查询结果回来。</p>
 <p>以下简略介绍第二种做法</p>
 <h4 id="具体流程"><a href="#具体流程" class="headerlink" title="具体流程"></a>具体流程</h4><ol>
@@ -401,6 +417,13 @@
 <p>以下是一个通用的客户端shadowsocks.json配置文件的做法, server填的是服务器的ip，server_port是服务器ss服务端监听的端口，password自己设定。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;server&quot;:&quot;&quot;,</span><br><span class="line">    &quot;server_port&quot;: &quot;&quot;,</span><br><span class="line">    &quot;local_port&quot;:1080,</span><br><span class="line">    &quot;password&quot;:&quot;&quot;,</span><br><span class="line">    &quot;timeout&quot;:300,</span><br><span class="line">    &quot;method&quot;:&quot;aes-256-cfb&quot;,</span><br><span class="line">    &quot;fast_open&quot;: false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="更新日志"><a href="#更新日志" class="headerlink" title="更新日志"></a>更新日志</h3><ul>
+<li>2018.1.15 添加服务器运行代码的流程</li>
+</ul>
+<ul>
+<li>2018.1.10 修改conda create语句</li>
+</ul>
+<ul>
+<li>2018.1.5 添加conda生效的语句</li>
 <li>2018.1.4 创建文章</li>
 </ul>
 <h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
@@ -590,7 +613,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验室服务器背景"><span class="nav-number">1.</span> <span class="nav-text">实验室服务器背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验室服务器配置"><span class="nav-number">2.</span> <span class="nav-text">实验室服务器配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Python-Tensorflow"><span class="nav-number">2.0.1.</span> <span class="nav-text">Python + Tensorflow</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些已有的数据集存放"><span class="nav-number">3.</span> <span class="nav-text">一些已有的数据集存放</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#科学上网Tips"><span class="nav-number">4.</span> <span class="nav-text">科学上网Tips</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#具体流程"><span class="nav-number">4.0.1.</span> <span class="nav-text">具体流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端"><span class="nav-number">4.0.2.</span> <span class="nav-text">服务端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端设置"><span class="nav-number">4.0.3.</span> <span class="nav-text">客户端设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新日志"><span class="nav-number">4.1.</span> <span class="nav-text">更新日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">4.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验室服务器背景"><span class="nav-number">1.</span> <span class="nav-text">实验室服务器背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验室服务器配置"><span class="nav-number">2.</span> <span class="nav-text">实验室服务器配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Python-Tensorflow"><span class="nav-number">2.0.1.</span> <span class="nav-text">Python + Tensorflow</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验室服务器代码运行"><span class="nav-number">3.</span> <span class="nav-text">实验室服务器代码运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些已有的数据集存放"><span class="nav-number">4.</span> <span class="nav-text">一些已有的数据集存放</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#科学上网Tips"><span class="nav-number">5.</span> <span class="nav-text">科学上网Tips</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#具体流程"><span class="nav-number">5.0.1.</span> <span class="nav-text">具体流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端"><span class="nav-number">5.0.2.</span> <span class="nav-text">服务端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端设置"><span class="nav-number">5.0.3.</span> <span class="nav-text">客户端设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新日志"><span class="nav-number">5.1.</span> <span class="nav-text">更新日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">5.2.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
             
 
           </div>
