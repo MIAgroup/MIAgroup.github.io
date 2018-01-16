@@ -10,7 +10,7 @@ tags: [this_site, lincolnzjx]
 
 简单来说，按照下图指引，从左到右是依赖关系。
 
-$tensorflow\_gpu \rightarrow cudnn \rightarrow cuda$
+$tensorflow(GPU) \rightarrow cudnn \rightarrow cuda$ 
 
 因为实验室的cudnn主要是5.1, 6以及cuda版本主要8.0，所以下载的tensorflow版本要与之相适应才能使用。
 
