@@ -20,10 +20,11 @@ $tensorflow(GPU) \rightarrow cudnn \rightarrow cuda$
 
 ### pip安装包的网速比较慢
 
-**解决方案**：添加参数**--default-timeout=100** ，如下，用处是延长下载等待时间
+**解决方案**：换源
 
 ```
-pip install --default-timeout=100 xxx
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
+
 ```
 
 ### 查看cuda版本
