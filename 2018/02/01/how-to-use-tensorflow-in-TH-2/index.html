@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/brain_medium.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/brain_small.png?v=5.1.3">
+
+
+
+
+
+
+  <meta name="keywords" content="cuizhiying,labinfo," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="分享一下我个人在Ubuntu操作系统上登录和使用超算中心的一些经验和总结. 这些内容在大群里面的超算中心的使用说明都有提到, 但是里面的内容因为要涉及到多个不同的操作系统, 所以信息量比较大, 我刚开始看的时候是找不到北的. 如果你想尝试一些超算中心飞一般的速度, 希望以下内容可以给你带来一点参考. 概述优点:  天河二号一个运算节点有四张K80显卡, 现存11439MiB/GPU, 一个任务最多">
+<meta name="keywords" content="cuizhiying,labinfo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="怎样在使用天河二号运行深度学习框架">
+<meta property="og:url" content="http://MIAgroup.github.io/2018/02/01/how-to-use-tensorflow-in-TH-2/index.html">
+<meta property="og:site_name" content="MIAgroup">
+<meta property="og:description" content="分享一下我个人在Ubuntu操作系统上登录和使用超算中心的一些经验和总结. 这些内容在大群里面的超算中心的使用说明都有提到, 但是里面的内容因为要涉及到多个不同的操作系统, 所以信息量比较大, 我刚开始看的时候是找不到北的. 如果你想尝试一些超算中心飞一般的速度, 希望以下内容可以给你带来一点参考. 概述优点:  天河二号一个运算节点有四张K80显卡, 现存11439MiB/GPU, 一个任务最多">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-20T08:47:39.487Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="怎样在使用天河二号运行深度学习框架">
+<meta name="twitter:description" content="分享一下我个人在Ubuntu操作系统上登录和使用超算中心的一些经验和总结. 这些内容在大群里面的超算中心的使用说明都有提到, 但是里面的内容因为要涉及到多个不同的操作系统, 所以信息量比较大, 我刚开始看的时候是找不到北的. 如果你想尝试一些超算中心飞一般的速度, 希望以下内容可以给你带来一点参考. 概述优点:  天河二号一个运算节点有四张K80显卡, 现存11439MiB/GPU, 一个任务最多">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://MIAgroup.github.io/2018/02/01/how-to-use-tensorflow-in-TH-2/"/>
+
+
+
+
+
+  <title>怎样在使用天河二号运行深度学习框架 | MIAgroup</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MIAgroup</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">路漫漫而其修远兮，吾将上下而求索</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://MIAgroup.github.io/2018/02/01/how-to-use-tensorflow-in-TH-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MIAgroup">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/brain_large.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MIAgroup">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">怎样在使用天河二号运行深度学习框架</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-01T14:42:13+08:00">
+                2018-02-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          <span>&nbsp; | &nbsp;
+          <span id="busuanzi_value_page_pv" ></span>次阅读
+          </span>    
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>分享一下我个人在Ubuntu操作系统上登录和使用超算中心的一些经验和总结. 这些内容在大群里面的超算中心的使用说明都有提到, 但是里面的内容因为要涉及到多个不同的操作系统, 所以信息量比较大, 我刚开始看的时候是找不到北的. 如果你想尝试一些超算中心飞一般的速度, 希望以下内容可以给你带来一点参考.</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>优点:</p>
+<ol>
+<li>天河二号一个运算节点有四张K80显卡, 现存11439MiB/GPU, 一个任务最多可同时使用10个节点, 速度贼快</li>
+<li>可远程登录, 回家也能跑代码, 妈妈再也不用担心我的学习 :)</li>
+<li>Tensorflow, Caffe框架都有现成的几个版本, 环境配置简单</li>
+</ol>
+<p>缺点:</p>
+<ol>
+<li>登录很麻烦(这个博客主要是为了分享这个麻烦的登录经历)</li>
+<li>VPN有时候不稳定, 感觉有点容易断线</li>
+<li>自定义的配置环境有点困难, 目前还没有尝试可行的方法.</li>
+<li>实验室大群里的教程有点杂乱</li>
+</ol>
+<p>这篇博客会在不断使用和积累的过程中不断更新.</p>
+<h2 id="整体的使用流程"><a href="#整体的使用流程" class="headerlink" title="整体的使用流程"></a>整体的使用流程</h2><p>不管您是在使用什么操作系统平台(Ubuntu, Windows, Mac等等), 总的流程都是一样的以下方式依次执行.</p>
+<ol>
+<li>使用VPN账号和密码连接登录超算中心的VPN</li>
+<li>使用超算中心的账号和私钥文件登录超算中心的操作系统(Centos)</li>
+<li>在加载需要的运算框架环境变量</li>
+<li>在指定的目录下(/BIGDATA)提交自己的作业(也就是执行代码)</li>
+</ol>
+<p>以下为详细内容(以在Ubuntu中配置为例子)<br>为了方大家的理解, 我将群里文件夹中能够拿到的账号的账号密码信息罗列如下(注意,要使用群里的账号密码, 以下敏感信息都已经用*打码了, 自己对着&lt;超算资源使用简单说明.docx&gt;这个文件一一对应上去):</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">题目</th>
+<th style="text-align:left">答案</th>
+<th style="text-align:left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">IPSec gateway address</td>
+<td style="text-align:left">10.88.16.100</td>
+<td style="text-align:left">有校内IP和校外IP之分</td>
+</tr>
+<tr>
+<td style="text-align:left">IPSec ID</td>
+<td style="text-align:left">hi***ne</td>
+<td style="text-align:left">*是隐藏内容</td>
+</tr>
+<tr>
+<td style="text-align:left">IPSec secret</td>
+<td style="text-align:left">gz***23</td>
+<td style="text-align:left">*是隐藏内容</td>
+</tr>
+<tr>
+<td style="text-align:left">VPN账号</td>
+<td style="text-align:left">sy***_1</td>
+<td style="text-align:left">同上</td>
+</tr>
+<tr>
+<td style="text-align:left">VPN密码</td>
+<td style="text-align:left">Hp***86</td>
+<td style="text-align:left">同上</td>
+</tr>
+<tr>
+<td style="text-align:left">超算中心的账号</td>
+<td style="text-align:left">sy***_2</td>
+<td style="text-align:left">同上</td>
+</tr>
+<tr>
+<td style="text-align:left">超算中心的密码</td>
+<td style="text-align:left">是一个秘钥文件(<code>***.id</code>)</td>
+<td style="text-align:left">在私钥这个文件夹里</td>
+</tr>
+</tbody>
+</table>
+<p>没错, 登录一下超算中心就是需要那么多的账号和密码, 说很简单估计你也不会信的了.但其实只是配置复杂一点点, 使用起来还是很方便的了.</p>
+<h2 id="登录VPN"><a href="#登录VPN" class="headerlink" title="登录VPN"></a>登录VPN</h2><p>在Ubuntu下要使用<code>vpnc</code>工具来登录超算的VPN账号.</p>
+<h3 id="安装vpnc"><a href="#安装vpnc" class="headerlink" title="安装vpnc"></a>安装<code>vpnc</code></h3><p>在命令行下安装<code>vpnc</code>的图形化工具<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install network-manager-vpnc-gnome</span><br></pre></td></tr></table></figure></p>
+<p>安装完毕之后,先重启一下自己的Ubuntu, 我们就可以在Ubuntu桌面的右上的网络链接中的配置我们的VPN了. 不重启电脑的话, 在下一步的登录VPN的选项中可能会看不到新安装的<code>vpnc</code>的连接方式.</p>
+<h3 id="登录VPN-1"><a href="#登录VPN-1" class="headerlink" title="登录VPN"></a>登录VPN</h3><p>在Ubuntu 16.04及16.04之前的操作系统版本, 可以参考这篇超赞的图文教程<a href="https://superuser.com/questions/739309/ubuntu-cisco-vpnc-client-for-my-new-ubuntu-version-32-bit" target="_blank" rel="noopener"><strong><em>点击这里</em></strong></a>, 17.10之后的Ubuntu版本也差不多, 点击右上脚的<code>网络</code>, 然后点击 <code>vpn off</code>, 然后点击<code>vpn setting</code>即可以看到相类似的配置界面.不复截图.<br>在配置过程中, <code>Gateway</code>选项对应的是上表中的第一个IP地址, 这里面有校内和校外之分,其中, <code>10.88.16.100</code>这个地址是校内校外都可以使用, <code>222.200.179.12</code>和<code>222.200.179.9</code>这个地址呢就只能在校园网中使用. 建议在校内使用的时候还是使用后两者吧, 应该会稳定一点.<br><code>User name</code>选项和<code>user password</code>选项对应着上表中的VPN账号和密码, <code>Group name</code>和<code>Group password</code>可对应着上面的IPSec ID 和 secret, 设置好保存起来就行.<br>当我们需要登录的超算中心之前, 同样是点开刚刚设置vpn的那个按钮, 然后点击我们刚刚设置的vpn的名称, 链接. 然后就可以了.<br>链接好了vpn之后我们就不能再正常使用外网了, 啥都登录不上了. 有一个方法可以将这些流量区分开来的, 但是我还没有开始折腾, 先这样子将就着吧.</p>
+<h2 id="使用ssh登录超算中心"><a href="#使用ssh登录超算中心" class="headerlink" title="使用ssh登录超算中心"></a>使用ssh登录超算中心</h2><p>有了VPN我们只是修好了通往超算中心的路而已, 要想进去使用还得用超算中心的账号和密码来打开超算中心的大门. 目前超算中心只支持ssh协议登录.<br>首先, 我们先把与账号名<code>sy***_2</code>相对应的<code>sy***_2.id</code>那个一秘钥文件复制到一个相对固定的目录中, 如<code>/home/username/.ssh/</code>的路径下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp sy***_2.id ~/.ssh/</span><br></pre></td></tr></table></figure></p>
+<p>注意, 这只是一个例子, 上面的命令直接执行的话肯定要报错的, 要把文件名和文件的路径对应的修改过来.<br>然后在终端中使用<code>ssh</code>命令登录超算中心.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -i ~/.ssh/sy***_2.id sy**_2@172.16.22.41</span><br></pre></td></tr></table></figure></p>
+<p>简单地分析一下这一条登录命令, -i 后面跟着的是秘钥登录所使用的秘钥文件, <code>sy**_2@172.16.22.41</code>中<code>@</code>前面部分表示的是我们要登录的IP地址.<br>那么长的一挑命令, 我是不愿意每次登录的时候都要背或者查那一串毫无意思的IP得知的. 所以我们可以通过配置ssh的配置文件来简化我们输入.<br>我们输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gedit ~/.ssh/config</span><br></pre></td></tr></table></figure></p>
+<p>命令, 来编辑这个配置文件(一般如果你是第一次编辑这个文件, 他很可能是一个空白的文件)<br>往配置文件中添加一下内容.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host cs</span><br><span class="line">    HostName 172.16.22.41</span><br><span class="line">    User     sy***_2</span><br><span class="line">    IdentityFile ~/.ssh/sy***_2.id</span><br></pre></td></tr></table></figure></p>
+<p>其中<code>Host cs</code>中的<code>cs</code>是根据自己的意愿起的名字, 我在这里起名为cs是超算的拼音首字母的意思.<br>做完以上所有的配置, 以后登录的时候就方便了, 点一下桌面右上角的链接VPN, 然后打开终端输入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh cs</span><br></pre></td></tr></table></figure></p>
+<p>然后我们就愉快的登录上超算中心了.</p>
+<h2 id="在超算中心上传和下载文件"><a href="#在超算中心上传和下载文件" class="headerlink" title="在超算中心上传和下载文件"></a>在超算中心上传和下载文件</h2><p>使用sftp协议, 其登录方法和ssh协议一毛一样. 要注意的是我们所有的运行文件和运行时要用到的数据都要放到~/BIGDATA路径中去.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sftp cs</span><br></pre></td></tr></table></figure></p>
+<p>然后就可以使用常江的<code>push</code>, <code>get</code>命令来上传和下载文件了,sftp的从入门到精通的教程可以点击<a href="https://www.digitalocean.com/community/tutorials/how-to-use-sftp-to-securely-transfer-files-with-a-remote-server" target="_blank" rel="noopener">这里</a></p>
+<h2 id="运行程序"><a href="#运行程序" class="headerlink" title="运行程序"></a>运行程序</h2><p>好了, 这里的运行程序和我们在本机运行环境还是有很大不同的, 在这里, 刚刚登录的时候, 会发现这里啥也没有装, 也不能在本机上直接运行程序. 这时候, 我们就可以看一下系统给我们与装好的模块了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">module avail</span><br></pre></td></tr></table></figure></p>
+<p>我们可以看到系统中已经装好了pytorch caffe 和tensorflow的各种版本, 好吧,还没有tensorflow的1.4和最新的1.5版, 假如我要运行一个Tensorflow的代码, 我们就直接运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">module load TensorFlow/1.3-gpu-py3.6</span><br></pre></td></tr></table></figure></p>
+<p><code>load</code>后面的参数要严格按照那个<code>avail</code>列出的命令来执行.<br>输入这条命令之后, 你会惊奇的发现啥也没有发生. 恩! 这很好! 这涉及到Unix的一条哲学问题: 没有消息就是最好的消息! 说明命令运行成功了, 模块成功的加载进来了.<br>然后我们执行我的代码脚本(test.py):<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yhrun -p gpu -n 1 -t 1 python3.6 test.py</span><br></pre></td></tr></table></figure></p>
+<p>而不能直接执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3.6</span><br></pre></td></tr></table></figure></p>
+<p>因为这就相当于在我们的中转服务上直接跑代码一样, 会把中转服务器的资源全部占用,然后其他的就卡爆了. 而上面的<code>yhrun</code>呢则将自己的代码提交给强大的天河去处理和运算了.上面的具体的参数的含义, 可以详细参考一下群里的文件.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cuizhiying/" rel="tag"># cuizhiying</a>
+          
+            <a href="/tags/labinfo/" rel="tag"># labinfo</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/16/服务器上使用tensorflow/" rel="next" title="服务器上使用tensorflow">
+                <i class="fa fa-chevron-left"></i> 服务器上使用tensorflow
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/brain_large.png"
+                alt="MIAgroup" />
+            
+              <p class="site-author-name" itemprop="name">MIAgroup</p>
+              <p class="site-description motion-element" itemprop="description">Medical Image Analysis Group from SYSU</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MIAgroup" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:MIAgroup.sysu@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整体的使用流程"><span class="nav-number">2.</span> <span class="nav-text">整体的使用流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登录VPN"><span class="nav-number">3.</span> <span class="nav-text">登录VPN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装vpnc"><span class="nav-number">3.1.</span> <span class="nav-text">安装vpnc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录VPN-1"><span class="nav-number">3.2.</span> <span class="nav-text">登录VPN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用ssh登录超算中心"><span class="nav-number">4.</span> <span class="nav-text">使用ssh登录超算中心</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在超算中心上传和下载文件"><span class="nav-number">5.</span> <span class="nav-text">在超算中心上传和下载文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行程序"><span class="nav-number">6.</span> <span class="nav-text">运行程序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MIAgroup</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<span id="busuanzi_container_site_uv">
+  你是第<span id="busuanzi_value_site_uv"></span>个蹦跶到本站的小伙伴
+  </span>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

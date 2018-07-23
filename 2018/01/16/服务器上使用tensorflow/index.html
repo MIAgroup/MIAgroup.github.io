@@ -75,18 +75,18 @@
 
 
 
-<meta name="description" content="使用tensorflow各组件之间的依赖关系简单来说，按照下图指引，从左到右是依赖关系。 $tensorflow(GPU) \rightarrow cudnn \rightarrow cuda$  因为实验室的cudnn主要是5.1, 6以及cuda版本主要8.0，所以下载的tensorflow版本要与之相适应才能使用。 实验室服务器使用tensorflow概况pip安装包的网速比较慢解决方案：添">
+<meta name="description" content="使用tensorflow各组件之间的依赖关系简单来说，按照下图指引，从左到右是依赖关系。 $tensorflow(GPU) \rightarrow cudnn \rightarrow cuda$  因为实验室的cudnn主要是5.1, 6以及cuda版本主要8.0，所以下载的tensorflow版本要与之相适应才能使用。 实验室服务器使用tensorflow概况pip安装包的网速比较慢解决方案：换">
 <meta name="keywords" content="this_site,lincolnzjx">
 <meta property="og:type" content="article">
 <meta property="og:title" content="服务器上使用tensorflow">
 <meta property="og:url" content="http://MIAgroup.github.io/2018/01/16/服务器上使用tensorflow/index.html">
 <meta property="og:site_name" content="MIAgroup">
-<meta property="og:description" content="使用tensorflow各组件之间的依赖关系简单来说，按照下图指引，从左到右是依赖关系。 $tensorflow(GPU) \rightarrow cudnn \rightarrow cuda$  因为实验室的cudnn主要是5.1, 6以及cuda版本主要8.0，所以下载的tensorflow版本要与之相适应才能使用。 实验室服务器使用tensorflow概况pip安装包的网速比较慢解决方案：添">
+<meta property="og:description" content="使用tensorflow各组件之间的依赖关系简单来说，按照下图指引，从左到右是依赖关系。 $tensorflow(GPU) \rightarrow cudnn \rightarrow cuda$  因为实验室的cudnn主要是5.1, 6以及cuda版本主要8.0，所以下载的tensorflow版本要与之相适应才能使用。 实验室服务器使用tensorflow概况pip安装包的网速比较慢解决方案：换">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-16T07:49:37.393Z">
+<meta property="og:updated_time" content="2018-07-20T09:42:26.697Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="服务器上使用tensorflow">
-<meta name="twitter:description" content="使用tensorflow各组件之间的依赖关系简单来说，按照下图指引，从左到右是依赖关系。 $tensorflow(GPU) \rightarrow cudnn \rightarrow cuda$  因为实验室的cudnn主要是5.1, 6以及cuda版本主要8.0，所以下载的tensorflow版本要与之相适应才能使用。 实验室服务器使用tensorflow概况pip安装包的网速比较慢解决方案：添">
+<meta name="twitter:description" content="使用tensorflow各组件之间的依赖关系简单来说，按照下图指引，从左到右是依赖关系。 $tensorflow(GPU) \rightarrow cudnn \rightarrow cuda$  因为实验室的cudnn主要是5.1, 6以及cuda版本主要8.0，所以下载的tensorflow版本要与之相适应才能使用。 实验室服务器使用tensorflow概况pip安装包的网速比较慢解决方案：换">
 
 
 
@@ -335,8 +335,8 @@
         <h2 id="使用tensorflow各组件之间的依赖关系"><a href="#使用tensorflow各组件之间的依赖关系" class="headerlink" title="使用tensorflow各组件之间的依赖关系"></a>使用tensorflow各组件之间的依赖关系</h2><p>简单来说，按照下图指引，从左到右是依赖关系。</p>
 <p>$tensorflow(GPU) \rightarrow cudnn \rightarrow cuda$ </p>
 <p>因为实验室的cudnn主要是5.1, 6以及cuda版本主要8.0，所以下载的tensorflow版本要与之相适应才能使用。</p>
-<h2 id="实验室服务器使用tensorflow概况"><a href="#实验室服务器使用tensorflow概况" class="headerlink" title="实验室服务器使用tensorflow概况"></a>实验室服务器使用tensorflow概况</h2><h3 id="pip安装包的网速比较慢"><a href="#pip安装包的网速比较慢" class="headerlink" title="pip安装包的网速比较慢"></a>pip安装包的网速比较慢</h3><p><strong>解决方案</strong>：添加参数<strong>–default-timeout=100</strong> ，如下，用处是延长下载等待时间</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --default-timeout=100 xxx</span><br></pre></td></tr></table></figure>
+<h2 id="实验室服务器使用tensorflow概况"><a href="#实验室服务器使用tensorflow概况" class="headerlink" title="实验室服务器使用tensorflow概况"></a>实验室服务器使用tensorflow概况</h2><h3 id="pip安装包的网速比较慢"><a href="#pip安装包的网速比较慢" class="headerlink" title="pip安装包的网速比较慢"></a>pip安装包的网速比较慢</h3><p><strong>解决方案</strong>：换源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package</span><br></pre></td></tr></table></figure>
 <h3 id="查看cuda版本"><a href="#查看cuda版本" class="headerlink" title="查看cuda版本"></a>查看cuda版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/<span class="built_in">local</span>/cuda/version.txt</span><br></pre></td></tr></table></figure>
 <h3 id="查看cudnn版本"><a href="#查看cudnn版本" class="headerlink" title="查看cudnn版本"></a>查看cudnn版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/<span class="built_in">local</span>/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2</span><br></pre></td></tr></table></figure>
 <h3 id="面对cudnn版本不匹配的解决方案（举个粟子）"><a href="#面对cudnn版本不匹配的解决方案（举个粟子）" class="headerlink" title="面对cudnn版本不匹配的解决方案（举个粟子）"></a>面对cudnn版本不匹配的解决方案（举个粟子）</h3><ul>
@@ -397,6 +397,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/01/how-to-use-tensorflow-in-TH-2/" rel="prev" title="怎样在使用天河二号运行深度学习框架">
+                怎样在使用天河二号运行深度学习框架 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -477,7 +481,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -490,7 +494,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
